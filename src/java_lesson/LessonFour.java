@@ -1,5 +1,11 @@
 package java_lesson;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class LessonFour {
 	/*
 	 * 隨機產生15個介於1-10之間的BigDecimal(不能重覆), 將其取至小數第三位(四捨五入)並依序存入Collection類物件,
@@ -8,7 +14,34 @@ public class LessonFour {
 	 * 
 	 */
 	public static void main(String[] args) {
+		DecimalFormat df = new DecimalFormat("#.000");
+		List<BigDecimal> collect = new ArrayList<BigDecimal>();
 
+		for (int i = 1; i <= 15; i++) {
+			BigDecimal floatNum = new BigDecimal(df.format(Math.random() * 9 + 1));
+			collect.add(floatNum);
+		}
+
+//		System.out.println(String.join(",", collect.toString()));
+		Collections.sort(collect);
+
+		BigDecimal sum = new BigDecimal("0");
+		String chain = "";
+
+		for (int i = 0; i < collect.size(); i++) {
+			BigDecimal current = collect.get(i);
+
+			sum.add(current);
+			chain += current.toString();
+
+			if (i < collect.size() - 1) {
+				chain += ", ";
+			}
+		}
+
+		System.out.println(sum);
+		System.out.println("排序後：" + chain);
+		System.out.println("平均數：" + sum.divide(new BigDecimal("15"), 3, BigDecimal.ROUND_HALF_UP));
 	}
 
 }
