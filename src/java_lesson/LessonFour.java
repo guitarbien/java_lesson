@@ -16,7 +16,14 @@ public class LessonFour {
 		List<BigDecimal> collect = new ArrayList<BigDecimal>();
 
 		for ( int i = 1; i <= 15; i++ ) {
-			collect.add( new BigDecimal( df.format( Math.random() * 9 + 1 ) ) );
+			BigDecimal rand = new BigDecimal( df.format( Math.random() * 9 + 1 ) );
+
+			if ( collect.contains( rand ) ) {
+				i--;
+				continue;
+			}
+
+			collect.add( rand );
 		}
 
 		Collections.sort( collect );
