@@ -19,15 +19,19 @@ public class LessonSeven {
 
 		String decodeStr = decoding( encodingStr );
 
-		writeFile( "D:\\encoding_file_here\\decode_ok.txt", decodeStr );
+		writeFile( "D:\\encoding_file_here\\decode_ok.txt", decodeStr, true );
 		System.out.println( "ok" );
 	}
 
-	private static void writeFile( String filepath, String content ) {
+	public static void writeFile( String filepath, String content ) {
+		writeFile( filepath, content, false );
+	}
+
+	public static void writeFile( String filepath, String content, Boolean useAppend ) {
 		try {
 			File file = new File( filepath );
 			file.getParentFile().mkdirs();
-			FileWriter fw = new FileWriter( file, true );
+			FileWriter fw = new FileWriter( file, useAppend );
 
 			BufferedWriter bw = new BufferedWriter( fw );
 
@@ -40,7 +44,6 @@ public class LessonSeven {
 			e.printStackTrace();
 		}
 
-		return;
 	}
 
 	private static String decoding( StringBuffer encodingStr ) {
